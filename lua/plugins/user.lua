@@ -56,6 +56,11 @@ return {
   },
 
   {
+    "AstroNvim/astrocommunity",
+   import = "astrocommunity.colorscheme.catppuccin"
+  },
+
+  {
     "folke/tokyonight.nvim",
     event = "User AstroFile",
   },
@@ -105,7 +110,11 @@ return {
     }
   },
 
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  { "catppuccin/nvim",
+    event = "User AstroFile",
+    name = "catppuccin",
+    priority = 1000
+  },
 
   -- == Examples of Adding Plugins ==
   vim.keymap.set("n", "<leader>z", "<cmd>%s/<C-R><C-W>/<C-R>0/g<cr>", { desc = "lazy_replace" }),
