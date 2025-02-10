@@ -1,5 +1,3 @@
--- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
 -- You can also add or configure plugins by creating files in this `plugins/` folder
 -- Here are some examples:
 
@@ -127,33 +125,27 @@ return {
     }
   },
 
-  -- { "catppuccin/nvim",
-  --   event = "User AstroFile",
-  --   name = "catppuccin",
-  --   priority = 1000
-  -- },
-
-  -- == Examples of Adding Plugins ==
+  --- Here I add my personal keymaps
   vim.keymap.set("n", "<leader>z", "<cmd>%s/<C-R><C-W>/<C-R>0/g<cr>", { desc = "lazy_replace" }),
   vim.keymap.set("n", "<leader>mw", "<cmd>MaximizerToggle<cr>", { desc = "MaximizerToggle" }),
+  vim.keymap.set("n", "x", '"_x'),
   -- vim.keymap.set("n", "<leader>mr", "<cmd>RegexplainerShowPopup<cr>", { desc = "RegexplainerShowPopup" }),
   -- vim.keymap.set("n", "<leader>G", "<cmd>G<cr>", { desc = "fugitive" }),
   -- Make sure only desired input goes to the system clipboard
-  vim.keymap.set("n", "x", '"_x'),
   -- vim.keymap.set("n", "c", '"_c'),
   -- vim.keymap.set("n", "C", '"_C'),
   -- vim.keymap.set("n", "s", '"_s'),
   -- vim.keymap.set("n", "d", '"_d'),
   -- vim.keymap.set("n", "D", '"_D'),
 
-  -- require 'lspconfig'.ansiblels.setup {
-  --    on_attach = function()
-  --       vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = 0 })
-  --       vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, { buffer = 0 })
-  --       vim.keymap.set("n", "<leader>df", vim.diagnostic.goto_next, { buffer = 0 })
-  --       vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev, { buffer = 0 })
-  --       -- vim.keymap.set("n", "eh", "<cmd>TSBufToggle highlight<cr>", { buffer = 0 })
-  --    end
-  -- }, --- Connect to ansible language server
+  require 'lspconfig'.ansiblels.setup {
+     on_attach = function()
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = 0 })
+        vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, { buffer = 0 })
+        vim.keymap.set("n", "<leader>df", vim.diagnostic.goto_next, { buffer = 0 })
+        vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev, { buffer = 0 })
+        -- vim.keymap.set("n", "eh", "<cmd>TSBufToggle highlight<cr>", { buffer = 0 })
+     end
+  }, --- Connect to ansible language server
 
 }
