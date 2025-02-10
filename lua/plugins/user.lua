@@ -84,9 +84,26 @@ return {
     event = "User AstroFile",
   },
 
+  -- {
+  --   "tpope/vim-fugitive",
+  --   event = "User AstroGitFile",
+  -- },
+
   {
-    "tpope/vim-fugitive",
+    "nvim-tree/nvim-web-devicons", --- opts = {} 
     event = "User AstroGitFile",
+  },
+
+  {
+    'Exafunction/codeium.vim',
+    event = 'BufEnter',
+    config = function ()
+    -- Change '<C-g>' here to any keycode you like.
+    vim.keymap.set('i', '<C-g>', function () return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
+    vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true, silent = true })
+    vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true })
+    vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
+  end
   },
 
   {
@@ -94,7 +111,7 @@ return {
     event = "User AstroFile",
     opts = {
         model = "mistral-dev", -- The default model to use.
-        display_mode = "split", -- The display mode. Can be "float" or "split".
+        display_mode = "float", -- The display mode. Can be "float" or "split".
         show_prompt = false, -- Shows the Prompt submitted to Ollama.
         show_model = false, -- Displays which model you are using at the beginning of your chat session.
         no_auto_close = false, -- Never closes the window automatically.
@@ -120,7 +137,7 @@ return {
   vim.keymap.set("n", "<leader>z", "<cmd>%s/<C-R><C-W>/<C-R>0/g<cr>", { desc = "lazy_replace" }),
   vim.keymap.set("n", "<leader>mw", "<cmd>MaximizerToggle<cr>", { desc = "MaximizerToggle" }),
   -- vim.keymap.set("n", "<leader>mr", "<cmd>RegexplainerShowPopup<cr>", { desc = "RegexplainerShowPopup" }),
-  vim.keymap.set("n", "<leader>G", "<cmd>G<cr>", { desc = "fugitive" }),
+  -- vim.keymap.set("n", "<leader>G", "<cmd>G<cr>", { desc = "fugitive" }),
   -- Make sure only desired input goes to the system clipboard
   vim.keymap.set("n", "x", '"_x'),
   -- vim.keymap.set("n", "c", '"_c'),
