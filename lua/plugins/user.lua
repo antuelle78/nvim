@@ -144,8 +144,10 @@ return {
         vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, { buffer = 0 })
         vim.keymap.set("n", "<leader>df", vim.diagnostic.goto_next, { buffer = 0 })
         vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev, { buffer = 0 })
-        -- vim.keymap.set("n", "eh", "<cmd>TSBufToggle highlight<cr>", { buffer = 0 })
+        vim.keymap.set("n", "eh", "<cmd>TSBufToggle highlight<cr>", { buffer = 0 })
      end
   }, --- Connect to ansible language server
+--- configure treesitter to ignore .yaml, .yml and yaml.ansible files, the parsers for these
+  --- files should be ignored
 
 }
