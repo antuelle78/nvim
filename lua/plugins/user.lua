@@ -13,8 +13,8 @@ return {
     event = "VimEnter",
   },
 
-  -- Requirements for ansible-vim
-  -- {
+  -- -- Requirements for ansible-vim
+  -- --
   --   "jay-babu/mason-null-ls.nvim",
   --   opts = function(_, opts) opts.ensure_installed = utils.list_insert_unique(opts.ensure_installed, "ansiblelint") end,
   -- },
@@ -26,7 +26,7 @@ return {
   {
     "pearofducks/ansible-vim",
     event = "User AstroFile",
-        init = function()
+    init = function()
       local function yaml_ft(path, bufnr)
         -- get content of buffer as string
         local content = vim.filetype.getlines(bufnr)
@@ -55,7 +55,7 @@ return {
 
   {
     "AstroNvim/astrocommunity",
-   import = "astrocommunity.colorscheme.catppuccin"
+    import = "astrocommunity.colorscheme.catppuccin"
   },
 
   {
@@ -88,42 +88,69 @@ return {
   -- },
 
   {
-    "nvim-tree/nvim-web-devicons", --- opts = {} 
+    "nvim-tree/nvim-web-devicons", --- opts = {}
     event = "User AstroGitFile",
+  },
+
+  {
+    "kdheepak/lazygit.nvim",
+    lazy = true,
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
+    },
+    -- optional for floating window border decoration
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    -- setting the keybinding for LazyGit with 'keys' is recommended in
+    -- order to load the plugin when the command is run for the first time
+    keys = {
+      { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+    }
   },
 
   {
     'Exafunction/codeium.vim',
     event = 'BufEnter',
-    config = function ()
-    -- Change '<C-g>' here to any keycode you like.
-    vim.keymap.set('i', '<C-g>', function () return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
-    vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true, silent = true })
-    vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true })
-    vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
-  end
+    config = function()
+      -- Change '<C-g>' here to any keycode you like.
+      vim.keymap.set('i', '<C-g>', function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
+      vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](1) end,
+        { expr = true, silent = true })
+      vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end,
+        { expr = true, silent = true })
+      vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
+    end
   },
 
-  {
-    "David-Kunz/gen.nvim",
-    event = "User AstroFile",
-    opts = {
-        model = "mistral-dev", -- The default model to use.
-        display_mode = "float", -- The display mode. Can be "float" or "split".
-        show_prompt = false, -- Shows the Prompt submitted to Ollama.
-        show_model = false, -- Displays which model you are using at the beginning of your chat session.
-        no_auto_close = false, -- Never closes the window automatically.
-        init = function(options) return pcall(io.popen, "ollama serve > /dev/null 2>&1 &") end,
-        -- Function to initialize Ollama
-        command = "curl --silent --no-buffer -X POST http://localhost:11434/api/generate -d $body",
-        -- The command for the Ollama service. You can use placeholders $prompt, $model and $body (shellescaped).
-        -- This can also be a lua function returning a command string, with options as the input parameter.
-        -- The executed command must return a JSON object with { response, context }
-        -- (context property is optional).
-        -- list_models = '<omitted lua function>', -- Retrieves a list of model names
-        debug = false -- Prints errors and the command which is run.
-    }
-  },
+  -- {
+  --   "David-Kunz/gen.nvim",
+  --   event = "User AstroFile",
+  --   opts = {
+  --     model = "llama3.2",     -- The default model to use.
+  --     display_mode = "float", -- The display mode. Can be "float" or "split".
+
+  --     show_prompt = false,    -- Shows the Prompt submitted to Ollama.
+  --     show_model = false,     -- Displays which model you are using at the beginning of your chat session.
+  --     no_auto_close = false,  -- Never closes the window automatically.
+  --     init = function(options) return pcall(io.popen, "ollama serve > /dev/null 2>&1 &") end,
+  --     -- Function to initialize Ollama
+  --     command = "curl --silent --no-buffer -X POST http://localhost:11434/api/generate -d $body",
+  --     -- The command for the Ollama service. You can use placeholders $prompt, $model and $body (shellescaped).
+  --     -- This can also be a lua function returning a command string, with options as the input parameter.
+  --     -- The executed command must return a JSON object with { response, context }
+  --     -- (context property is optional).
+  --     -- list_models = '<omitted lua function>', -- Retrieves a list of model names
+  --     debug = false -- Prints errors and the command which is run.
+  --   }
+  -- },
+
+  -- Minimal configuration
+  -- { "David-Kunz/gen.nvim" },
 
   --- Here I add my personal keymaps
   vim.keymap.set("n", "<leader>z", "<cmd>%s/<C-R><C-W>/<C-R>0/g<cr>", { desc = "lazy_replace" }),
@@ -139,15 +166,15 @@ return {
   -- vim.keymap.set("n", "D", '"_D'),
 
   require 'lspconfig'.ansiblels.setup {
-     on_attach = function()
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = 0 })
-        vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, { buffer = 0 })
-        vim.keymap.set("n", "<leader>df", vim.diagnostic.goto_next, { buffer = 0 })
-        vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev, { buffer = 0 })
-        vim.keymap.set("n", "eh", "<cmd>TSBufToggle highlight<cr>", { buffer = 0 })
-     end
+    on_attach = function()
+      vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = 0 })
+      vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, { buffer = 0 })
+      vim.keymap.set("n", "<leader>df", vim.diagnostic.goto_next, { buffer = 0 })
+      vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev, { buffer = 0 })
+      vim.keymap.set("n", "eh", "<cmd>TSBufToggle highlight<cr>", { buffer = 0 })
+    end
   }, --- Connect to ansible language server
---- configure treesitter to ignore .yaml, .yml and yaml.ansible files, the parsers for these
+  --- configure treesitter to ignore .yaml, .yml and yaml.ansible files, the parsers for these
   --- files should be ignored
 
 }
