@@ -1,6 +1,4 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
--- AstroCore provides a central place to modify mappings, vim options, autocommands, and more!
+ -- AstroCore provides a central place to modify mappings, vim options, autocommands, and more!
 -- Configuration documentation can be found with `:h astrocore`
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
 --       as this provides autocomplete and documentation while editing
@@ -51,6 +49,7 @@ return {
         ["[b"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
 
         -- mappings seen under group name "Buffer"
+        -- Note: <Tab> is used by nvim-cmp for completion; ensure no conflicts with windsurf.nvim
         ["<Leader>bd"] = {
           function()
             require("astroui.status.heirline").buffer_picker(
@@ -60,12 +59,15 @@ return {
           desc = "Close buffer from tabline",
         },
 
-        -- tables with just a `desc` key will be registered with which-key if it's installed
-        -- this is useful for naming menus
-        -- ["<Leader>b"] = { desc = "Buffers" },
+         -- tables with just a `desc` key will be registered with which-key if it's installed
+         -- this is useful for naming menus
+         -- ["<Leader>b"] = { desc = "Buffers" },
 
-        -- setting a mapping to false will disable it
-        -- ["<C-S>"] = false,
+         -- lazygit integration
+         ["<Leader>lg"] = { "<cmd>LazyGit<cr>", desc = "Open LazyGit" },
+
+         -- setting a mapping to false will disable it
+         -- ["<C-S>"] = false,
       },
     },
   },
