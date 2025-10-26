@@ -9,7 +9,7 @@ return {
     providers = {
       ollama = {
         endpoint = "http://127.0.0.1:11434",
-        model = "gptoss_16k",
+        model = "codellama",
       },
     },
   },
