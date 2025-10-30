@@ -1,6 +1,6 @@
   return {
     "nvim-lua/plenary.nvim", -- neccesary for lots of plugins
-    "mfussenegger/nvim-ansible",
+    { "mfussenegger/nvim-ansible", ft = { "ansible", "yaml.ansible" } },
     { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
     { "goolord/alpha-nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
     {
@@ -31,19 +31,8 @@
         },
       },
     },
-    { "hashivim/vim-terraform" },
-    {
-      "Exafunction/windsurf.nvim",
-      dependencies = {
-        "nvim-lua/plenary.nvim",
-        "hrsh7th/nvim-cmp",
-      },
-      config = function()
-        require("codeium").setup({
-          enable_cmp_source = true,
-        })
-      end,
-    },
+    { "hashivim/vim-terraform", ft = { "terraform", "tf" } },
+
     {
       "kdheepak/lazygit.nvim",
       lazy = true,
