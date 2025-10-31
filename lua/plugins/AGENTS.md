@@ -3,8 +3,9 @@
 ## Build/Lint/Test Commands
 - **Linting**: `selene` (uses neovim std, configured in selene.toml)
 - **Formatting**: `stylua` (2-space indent, 120 col width, Unix line endings, auto double quotes)
-- **Testing**: No dedicated tests; enable via `astrocommunity.testing` in community.lua
-- **Single Test**: N/A - enable testing community plugins for neotest integration
+- **None-ls**: Multiple formatters enabled (prettier, black, shfmt) and linters (shellcheck, yamllint, markdownlint)
+- **Testing**: Enable via `astrocommunity.testing` in community.lua for neotest integration
+- **Single Test**: N/A - testing framework not currently configured
 
 ## Code Style Guidelines
 - **Language**: Lua with Neovim API
@@ -16,10 +17,12 @@
 - **Structure**: Plugin specs in tables with `opts` for configuration, lazy loading preferred
 - **Comments**: `--` for single line, `---@` for documentation comments
 
-## LSP/Assist Rules
-- **No Cursor/Copilot rules detected** - follow standard Lua/Neovim conventions
+## LSP Configuration
+- **Inlay Hints**: Enabled for enhanced code understanding (Rust, TypeScript, etc.)
+- **Language Servers**: lua_ls, ansiblels, bashls, yamlls, jsonls, dockerls, taplo, terraformls, marksman
+- **Format on Save**: Enabled globally (timeout: 1000ms)
 - **Linting**: selene with relaxed rules (global_usage, if_same_then_else allowed)
-- **Formatting**: Auto-formatting with stylua on save via none-ls integration
+- **Formatters**: Auto-formatting via none-ls (stylua, prettier, black, shfmt)
 
 ## Avante AI Assistant Setup
 

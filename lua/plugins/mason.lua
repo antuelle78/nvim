@@ -8,7 +8,13 @@ return {
       ensure_installed = {
         "lua_ls",
         "ansiblels",
-        -- add more arguments for adding more language servers
+        "bashls",        -- Shell scripts
+        "yamlls",        -- YAML
+        "jsonls",        -- JSON
+        "dockerls",      -- Dockerfile
+        "taplo",         -- TOML
+        "terraformls",   -- Terraform
+        "marksman",      -- Markdown
       },
     },
   },
@@ -18,8 +24,13 @@ return {
     -- overrides `require("mason-null-ls").setup(...)`
     opts = {
       ensure_installed = {
-        "stylua",
-        -- add more arguments for adding more null-ls sources
+        "stylua",        -- Lua formatter
+        "prettier",      -- JS/TS/JSON/YAML/Markdown formatter
+        "black",         -- Python formatter
+        "shfmt",         -- Shell script formatter
+        "shellcheck",    -- Shell script linter
+        "yamllint",      -- YAML linter
+        "markdownlint",  -- Markdown linter
       },
     },
   },

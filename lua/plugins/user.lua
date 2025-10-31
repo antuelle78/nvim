@@ -99,4 +99,82 @@
          "nvim-telescope/telescope.nvim",
        },
      },
+
+     -- Lightning-fast cursor motion
+     {
+       "folke/flash.nvim",
+       event = "VeryLazy",
+       opts = {},
+       keys = {
+         { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+         { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+         { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+         { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+         { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+       },
+     },
+
+     -- Better diagnostics list and quickfix
+     {
+       "folke/trouble.nvim",
+       cmd = { "Trouble" },
+       opts = {},
+       keys = {
+         { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
+         { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
+         { "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Symbols (Trouble)" },
+         { "<leader>cl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", desc = "LSP Definitions / references / ... (Trouble)" },
+         { "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
+         { "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
+       },
+     },
+
+     -- Enhanced git diffs and merge conflict resolution
+     {
+       "sindrets/diffview.nvim",
+       cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+       opts = {},
+       keys = {
+         { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Open Diffview" },
+         { "<leader>gh", "<cmd>DiffviewFileHistory %<cr>", desc = "File History" },
+         { "<leader>gH", "<cmd>DiffviewFileHistory<cr>", desc = "Repo History" },
+       },
+     },
+
+     -- Enhanced text objects and operators
+     {
+       "echasnovski/mini.ai",
+       event = "VeryLazy",
+       opts = function()
+         local ai = require("mini.ai")
+         return {
+           n_lines = 500,
+           custom_textobjects = {
+             o = ai.gen_spec.treesitter({
+               a = { "@block.outer", "@conditional.outer", "@loop.outer" },
+               i = { "@block.inner", "@conditional.inner", "@loop.inner" },
+             }, {}),
+             f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }, {}),
+             c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }, {}),
+           },
+         }
+       end,
+     },
+
+     -- Surround text objects (add/delete/change surrounding chars)
+     {
+       "kylechui/nvim-surround",
+       event = "VeryLazy",
+       opts = {},
+     },
+
+     -- Project-wide search and replace
+     {
+       "nvim-pack/nvim-spectre",
+       cmd = "Spectre",
+       opts = {},
+       keys = {
+         { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
+       },
+     },
    }
