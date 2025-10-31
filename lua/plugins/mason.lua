@@ -28,7 +28,7 @@ return {
         "prettier",      -- JS/TS/JSON/YAML/Markdown formatter
         "black",         -- Python formatter
         "shfmt",         -- Shell script formatter
-        "shellcheck",    -- Shell script linter
+        -- "shellcheck", -- Not available as none-ls builtin, consider nvim-lint
         "yamllint",      -- YAML linter
         "markdownlint",  -- Markdown linter
       },
