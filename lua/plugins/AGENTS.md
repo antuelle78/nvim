@@ -1,23 +1,49 @@
-# AGENTS.md for Neovim Configuration
+# AGENTS.md for AstroNvim Configuration
 
 ## Build/Lint/Test Commands
-- **Linting**: Run `selene` (based on selene.toml with neovim std) to check Lua code.
-- **Formatting**: Use `stylua` (per .stylua.toml: 2-space indent, 120 col width).
-- **Testing**: No dedicated tests. Use `nvim --headless -c "lua require('test')" -c "qa"` for Lua execution.
-- **Single Test**: N/A - no test framework detected.
+- **Linting**: `selene` (uses neovim std, configured in selene.toml)
+- **Formatting**: `stylua` (2-space indent, 120 col width, Unix line endings, auto double quotes)
+- **Testing**: No dedicated tests; enable via `astrocommunity.testing` in community.lua
+- **Single Test**: N/A - enable testing community plugins for neotest integration
 
 ## Code Style Guidelines
-- **Language**: Lua for Neovim configuration.
-- **Imports**: Use `require("module")` for dependencies.
-- **Formatting**: Follow .stylua.toml: 2-space indentation, Unix line endings, auto double quotes.
-- **Types**: Annotate with ---@type for LSP support.
-- **Naming**: snake_case for variables, camelCase for functions, descriptive names.
-- **Error Handling**: Use pcall for safe requires, handle errors gracefully.
-- **Comments**: Use -- for comments, explain complex logic.
-- **Structure**: Group related configs in tables, use opts for plugin settings.
+- **Language**: Lua with Neovim API
+- **Imports**: `require("module")` for dependencies, `---@module` for type hints
+- **Formatting**: 2-space indentation, 120 col width, Unix line endings, double quotes preferred
+- **Types**: Use `---@type`, `---@param`, `---@return` for LSP type annotations
+- **Naming**: snake_case for variables/functions, PascalCase for modules, descriptive names
+- **Error Handling**: `pcall()` for safe requires, graceful error handling with vim.notify
+- **Structure**: Plugin specs in tables with `opts` for configuration, lazy loading preferred
+- **Comments**: `--` for single line, `---@` for documentation comments
 
 ## LSP/Assist Rules
-- **Cursor**: Follow .cursor/rules/ for auto-imports and snippet rules
-- **Copilot**: Enable with `:Copilot enable` - use `--comment` flag for comment-based prompts
-- **Linting**: selene.toml enforces Lua style guidelines
-- **Formatting**: stylua (2-space indent, 120-col width) autoformats on save
+- **No Cursor/Copilot rules detected** - follow standard Lua/Neovim conventions
+- **Linting**: selene with relaxed rules (global_usage, if_same_then_else allowed)
+- **Formatting**: Auto-formatting with stylua on save via none-ls integration
+
+## Avante AI Assistant Setup
+
+### API Key Configuration
+Avante requires an Anthropic Claude API key to function. Set the environment variable:
+```bash
+export ANTHROPIC_API_KEY="your-api-key-here"
+```
+Or use the scoped version for isolation:
+```bash
+export AVANTE_ANTHROPIC_API_KEY="your-api-key-here"
+```
+
+**Current Model**: Claude 3.5 Haiku (claude-3-5-haiku-20241022) - Fast and efficient for coding tasks
+
+### Basic Usage
+- `:AvanteAsk [question]` - Ask AI about your code
+- `:AvanteEdit` - Edit selected code blocks with AI
+- `:AvanteToggle` - Toggle the AI chat sidebar
+- `:AvanteClear` - Clear chat history
+
+### Rollback Instructions
+If you want to remove avante:
+1. Comment out or remove the avante plugin spec in `lua/plugins/user.lua`
+2. Restart Neovim or run `:Lazy reload`
+3. Remove API key environment variables if desired
+4. Delete any `avante.md` project instruction files
