@@ -18,22 +18,16 @@ return {
       },
     },
   },
-  -- use mason-null-ls to configure Formatters/Linter installation for null-ls sources
-  {
-    "jay-babu/mason-null-ls.nvim",
-    -- overrides `require("mason-null-ls").setup(...)`
-    opts = {
-      ensure_installed = {
-        "stylua",        -- Lua formatter
-        "prettier",      -- JS/TS/JSON/YAML/Markdown formatter
-        "black",         -- Python formatter
-        "shfmt",         -- Shell script formatter
-        -- "shellcheck", -- Not available as none-ls builtin, consider nvim-lint
-        "yamllint",      -- YAML linter
-        "markdownlint",  -- Markdown linter
-      },
-    },
-  },
+   -- Override AstroNvim's mason-null-ls to prevent duplicate source registration
+   {
+     "jay-babu/mason-null-ls.nvim",
+     opts = {
+       -- Don't auto-install or auto-register sources to avoid conflicts
+       ensure_installed = {},
+       automatic_installation = false,
+       automatic_setup = false,
+     },
+   },
   {
     "jay-babu/mason-nvim-dap.nvim",
     -- overrides `require("mason-nvim-dap").setup(...)`
