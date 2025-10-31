@@ -61,10 +61,27 @@ return {
 
          -- tables with just a `desc` key will be registered with which-key if it's installed
          -- this is useful for naming menus
-         -- ["<Leader>b"] = { desc = "Buffers" },
+         ["<Leader>b"] = { desc = "Buffers" },
+         ["<Leader>g"] = { desc = "Git" },
+         ["<Leader>s"] = { desc = "Search" },
+         ["<Leader>t"] = { desc = "Terminal/Toggle" },
+         ["<Leader>x"] = { desc = "Diagnostics/Quickfix" },
 
          -- lazygit integration
          ["<Leader>lg"] = { "<cmd>LazyGit<cr>", desc = "Open LazyGit" },
+
+         -- todo-comments navigation
+         ["]t"] = { function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
+         ["[t"] = { function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
+         ["<Leader>st"] = { "<cmd>TodoTelescope<cr>", desc = "Search TODOs" },
+
+         -- gitsigns integration (already installed via AstroNvim)
+         ["<Leader>gb"] = { function() require("gitsigns").blame_line() end, desc = "Git blame line" },
+         ["<Leader>gp"] = { function() require("gitsigns").preview_hunk() end, desc = "Preview hunk" },
+         ["<Leader>gr"] = { function() require("gitsigns").reset_hunk() end, desc = "Reset hunk" },
+         ["<Leader>gs"] = { function() require("gitsigns").stage_hunk() end, desc = "Stage hunk" },
+         ["]h"] = { function() require("gitsigns").next_hunk() end, desc = "Next git hunk" },
+         ["[h"] = { function() require("gitsigns").prev_hunk() end, desc = "Previous git hunk" },
 
          -- setting a mapping to false will disable it
          -- ["<C-S>"] = false,
