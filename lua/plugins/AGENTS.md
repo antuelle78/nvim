@@ -3,7 +3,7 @@
 ## Build/Lint/Test Commands
 - **Linting**: `selene` (uses neovim std, configured in selene.toml)
 - **Formatting**: `stylua` (2-space indent, 120 col width, Unix line endings, auto double quotes)
-- **None-ls**: Multiple formatters enabled (prettier, black, shfmt) and linters (yamllint, markdownlint)
+- **None-ls**: Uses AstroNvim defaults - formatters (stylua, prettier, black, shfmt) and linters (yamllint, markdownlint, ansiblelint, selene, isort)
 - **Testing**: Enable via `astrocommunity.testing` in community.lua for neotest integration
 - **Single Test**: N/A - testing framework not currently configured
 
