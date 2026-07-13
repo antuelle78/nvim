@@ -26,15 +26,3 @@
   vim.g.terraform_align = 1
   vim.g.terraform_fmt_on_save = 1
 
- -- Set up custom filetypes
- vim.filetype.add {
-   extension = {
-     foo = "fooscript",
-   },
-   filename = {
-     ["Foofile"] = "fooscript",
-   },
-   pattern = {
-     ["~/%.config/foo/.*"] = "fooscript",
-   },
- }

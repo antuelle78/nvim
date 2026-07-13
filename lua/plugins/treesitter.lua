@@ -15,7 +15,7 @@ return {
       "terraform",
       "hcl",
       "python",
-      "yaml",
+
       "bash",
       "json",
       "toml",

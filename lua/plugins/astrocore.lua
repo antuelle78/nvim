@@ -67,8 +67,6 @@ return {
          ["<Leader>t"] = { desc = "Terminal/Toggle" },
          ["<Leader>x"] = { desc = "Diagnostics/Quickfix" },
 
-         -- lazygit integration
-         ["<Leader>lg"] = { "<cmd>LazyGit<cr>", desc = "Open LazyGit" },
 
          -- todo-comments navigation
          ["]t"] = { function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
