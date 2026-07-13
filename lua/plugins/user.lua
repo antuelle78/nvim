@@ -175,8 +175,8 @@ return {
       end, { desc = "Add to opencode" })
 
       vim.keymap.set({ "n", "t" }, "<leader>ot", function()
-        require("opencode").toggle()
-      end, { desc = "Toggle opencode" })
+        require("opencode").command("session.new")
+      end, { desc = "New opencode session" })
 
       vim.keymap.set("n", "<leader>oup", function()
         require("opencode").command("session.half.page.up")
